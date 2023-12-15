@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fbr-vk-dbt">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Location Authorization View Controller-->
+        <scene sceneID="cUj-DO-RvR">
+            <objects>
+                <viewController storyboardIdentifier="LocationAuthorizationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fbr-vk-dbt" customClass="LocationAuthorizationViewController" customModule="SkyForecast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="avN-Kr-MqC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need your location :)" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LU5-Zh-zSK">
+                                <rect key="frame" x="40" y="310.5" width="295" height="46.5"/>
+                                <fontDescription key="fontDescription" name="SavoyeLetPlain" family="Savoye LET" pointSize="39"/>
+                                <color key="textColor" red="0.62352941179999999" green="0.41960784309999999" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_light_night" translatesAutoresizingMaskIntoConstraints="NO" id="h90-1p-Bvg">
+                                <rect key="frame" x="123.5" y="80.5" width="128" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="gfV-3B-LRG"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pry-d0-R7w">
+                                <rect key="frame" x="40" y="383" width="295" height="44"/>
+                                <color key="backgroundColor" red="0.62352941179999999" green="0.41960784309999999" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="C9D-t1-GFT"/>
+                                </constraints>
+                                <state key="normal" title="Allow Location">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="authorizationTapped:" destination="fbr-vk-dbt" eventType="touchUpInside" id="2oC-HK-2Vs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sq6-Ib-9Jk">
+                                <rect key="frame" x="40" y="435" width="295" height="44"/>
+                                <color key="backgroundColor" red="0.62352941179999999" green="0.41960784309999999" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="EQe-B6-dQa"/>
+                                </constraints>
+                                <state key="normal" title="Use without location">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nonAuthorizedUse:" destination="fbr-vk-dbt" eventType="touchUpInside" id="k7o-vV-Mv9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <constraints>
+                            <constraint firstItem="h90-1p-Bvg" firstAttribute="centerX" secondItem="avN-Kr-MqC" secondAttribute="centerX" id="2Qf-Xx-CdM"/>
+                            <constraint firstItem="Sq6-Ib-9Jk" firstAttribute="top" secondItem="pry-d0-R7w" secondAttribute="bottom" constant="8" id="EO6-3L-Ya1"/>
+                            <constraint firstItem="pry-d0-R7w" firstAttribute="leading" secondItem="LU5-Zh-zSK" secondAttribute="leading" id="GMt-oY-20s"/>
+                            <constraint firstItem="pry-d0-R7w" firstAttribute="trailing" secondItem="LU5-Zh-zSK" secondAttribute="trailing" id="LJl-pt-7L5"/>
+                            <constraint firstItem="pry-d0-R7w" firstAttribute="top" secondItem="LU5-Zh-zSK" secondAttribute="bottom" constant="26" id="OJN-Hi-9mB"/>
+                            <constraint firstItem="LU5-Zh-zSK" firstAttribute="leading" secondItem="u1h-ft-qa4" secondAttribute="leading" constant="40" id="hoU-lF-acZ"/>
+                            <constraint firstItem="LU5-Zh-zSK" firstAttribute="top" secondItem="h90-1p-Bvg" secondAttribute="bottom" constant="30" id="lpk-1i-YU9"/>
+                            <constraint firstItem="LU5-Zh-zSK" firstAttribute="centerY" secondItem="avN-Kr-MqC" secondAttribute="centerY" id="pPM-O4-Tfy"/>
+                            <constraint firstItem="Sq6-Ib-9Jk" firstAttribute="leading" secondItem="LU5-Zh-zSK" secondAttribute="leading" id="uLn-HI-TWA"/>
+                            <constraint firstItem="u1h-ft-qa4" firstAttribute="trailing" secondItem="LU5-Zh-zSK" secondAttribute="trailing" constant="40" id="wie-rY-QD5"/>
+                            <constraint firstItem="Sq6-Ib-9Jk" firstAttribute="trailing" secondItem="LU5-Zh-zSK" secondAttribute="trailing" id="yTu-a4-QGE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="u1h-ft-qa4"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="i3A-Gm-zy5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wFN-Et-ylE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-460" y="-80"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_light_night" width="128" height="128"/>
+    </resources>
+</document>

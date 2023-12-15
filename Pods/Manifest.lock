@@ -1,0 +1,22 @@
+PODS:
+  - PermissionsService/Core (0.9.6)
+  - PermissionsService/Location (0.9.6):
+    - PermissionsService/Core
+  - ReachabilitySwift (4.1.0)
+
+DEPENDENCIES:
+  - PermissionsService/Location
+  - ReachabilitySwift (= 4.1)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - PermissionsService
+    - ReachabilitySwift
+
+SPEC CHECKSUMS:
+  PermissionsService: 43cf1fd691d8e217f69c01fcfc1f9d129e2a69ac
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+
+PODFILE CHECKSUM: faf9a93b555df9aa7e561b46b4478d23a28524c6
+
+COCOAPODS: 1.6.0

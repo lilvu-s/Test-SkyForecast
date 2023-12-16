@@ -12,7 +12,15 @@ import Foundation
 typealias ResponseCompletion = (_ success: Bool, _ error: UserError?,_ response: WeekWeather?) -> Void
 typealias RequestResultBlock = (Bool, UserError?) -> Void
 
-//MARK: -
+enum NetworkURLs {
+    static let baseURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
+
+    enum Weather: String {
+        case daily = ""
+    }
+}
+
+//MARK: - Request Types
 struct RequestType {
     static let post = "POST"
     static let get = "GET"

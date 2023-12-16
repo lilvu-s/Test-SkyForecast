@@ -7,81 +7,44 @@
 //
 
 import Foundation
-import UIKit
 
-//MARK: - Config
-fileprivate class NetworkConfig {
-    static let baseURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
-    static let apiKey = "?unitGroup=metric&key=3YL7EZFDPM4YQ7CVSMGCMS77Z&contentType=json"
-    
-    static var fullBaseURL: String {
-        return baseURL + apiKey + "/"
-    }
-}
+final class NetworkManager {
+    typealias ResponseCompletion = (Bool, UserError?, WeekWeather?) -> Void
 
-class NetworkManager {
-    //MARK: - Properties
-    
-    func dailyWeather(for lat: Double, lon: Double, completion: @escaping ResponseCompletion){
+    func dailyWeather(for lat: Double, lon: Double, completion: @escaping ResponseCompletion) {
+        let router = WeatherRouter()
+        let route = router.dailyWeather(lat: lat, lon: lon)
+        
         guard ReachabilityManager.shared.isReachable else {
             completion(false, UserError.noInternet, nil)
             return
         }
 
-        
-        let baseUrlString = NetworkConfig.baseURL + "\(lat),\(lon)" + NetworkConfig.apiKey
-        let dailyForecastURL = baseUrlString
-        
-        
-        guard let url = URL(string: dailyForecastURL) else {
-            completion(false, UserError.custom("URL is notVlaid"), nil)
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        
-        request.httpMethod = RequestType.get
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        request.cachePolicy = .returnCacheDataElseLoad
+        do {
+            let request = try route.asURLRequest()
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard error == nil else {
+                    completion(false, UserError.custom(error!.localizedDescription), nil)
+                    return
+                }
 
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in
-            
-            guard error == nil else {
-                print("Error while fetching remote rooms: \(String(describing: error))")
-                completion(false, UserError.custom(error.debugDescription), nil)
-                return
-            }
-            
-            guard let dataToDecode = data else {
-                print("Nil data received from request \(url)")
-                completion(false, UserError.serverError, nil)
-                return
-            }
-            
-            do {
-                
-//                if let json = try JSONSerialization.jsonObject(with: dataToDecode, options: []) as? [String: Any] {
-//                    // try to read out a string array
-//                    
-//                }
-                
-                let decoder = JSONDecoder()
-                let model = try decoder.decode(WeekWeather.self, from: dataToDecode)
-                completion(true, nil, model)
-                
-            } catch let error {
-                print("Data could not be parsed! :'( \(error)")
-                completion(false, UserError.serverError, nil)
-            }
-        }
+                guard let data = data else {
+                    completion(false, UserError.serverError, nil)
+                    return
+                }
 
-        
-        task.resume()
+                do {
+                    let decoder = JSONDecoder()
+                    let model = try decoder.decode(WeekWeather.self, from: data)
+                    completion(true, nil, model)
+                } catch {
+                    completion(false, UserError.serverError, nil)
+                }
+            }
+            task.resume()
+        } catch {
+            completion(false, UserError.custom("Invalid URL"), nil)
+        }
     }
-    
-    
 }
-
 

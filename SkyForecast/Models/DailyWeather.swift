@@ -7,7 +7,6 @@
 //
 
 import Foundation
-// fdfdf
 
 struct DailyWeather: Codable {
     var description: String

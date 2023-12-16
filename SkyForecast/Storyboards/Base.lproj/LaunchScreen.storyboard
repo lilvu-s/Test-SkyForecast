@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -36,7 +37,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8PS-Xf-rpW"/>
-                        <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="8PS-Xf-rpW" firstAttribute="trailing" secondItem="h07-9w-Dg2" secondAttribute="trailing" constant="40" id="F43-Ou-ggd"/>
                             <constraint firstItem="RNL-ap-6bf" firstAttribute="leading" secondItem="8PS-Xf-rpW" secondAttribute="leading" constant="40" id="V7d-xe-vJb"/>
@@ -56,5 +57,8 @@
     </scenes>
     <resources>
         <image name="icon_light_night" width="64" height="64"/>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

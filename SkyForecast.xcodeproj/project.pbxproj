@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58552AFD2B2D6A000084FB9E /* WeatherRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58552AFC2B2D6A000084FB9E /* WeatherRouter.swift */; };
+		58552AFF2B2D6A450084FB9E /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58552AFE2B2D6A450084FB9E /* Routes.swift */; };
 		9B3124F1223FA0120086C8C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3124F0223FA0120086C8C0 /* AppDelegate.swift */; };
 		9B3124F6223FA0120086C8C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3124F4223FA0120086C8C0 /* Main.storyboard */; };
 		9B3124F8223FA0130086C8C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B3124F7223FA0130086C8C0 /* Assets.xcassets */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		58552AFC2B2D6A000084FB9E /* WeatherRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRouter.swift; sourceTree = "<group>"; };
+		58552AFE2B2D6A450084FB9E /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		6C36310DE80FC89D0A1B8C15 /* libPods-SkyForecast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SkyForecast.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3124ED223FA0120086C8C0 /* SkyForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3124F0223FA0120086C8C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		58552B002B2D6AFA0084FB9E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9B31251D223FB0950086C8C0 /* NetworkConstants.swift */,
+				58552AFE2B2D6A450084FB9E /* Routes.swift */,
+				58552AFC2B2D6A000084FB9E /* WeatherRouter.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		58A47F792B2D3A4400CBACF0 /* DailyWeather */ = {
+			isa = PBXGroup;
+			children = (
+				9B312509223FA2FC0086C8C0 /* DailyWeatherTableViewContoroller.swift */,
+				9B31250B223FA31A0086C8C0 /* DailyWeatherTableViewCell.swift */,
+			);
+			path = DailyWeather;
+			sourceTree = "<group>";
+		};
 		9B3124E4223FA0120086C8C0 = {
 			isa = PBXGroup;
 			children = (
@@ -99,18 +122,18 @@
 				9B31250D223FA4420086C8C0 /* Common */,
 				9B312504223FA09C0086C8C0 /* Controllers */,
 				9B312503223FA08F0086C8C0 /* Storyboards */,
-				9B312502223FA0310086C8C0 /* Recources */,
+				9B312502223FA0310086C8C0 /* Resources */,
 			);
 			path = SkyForecast;
 			sourceTree = "<group>";
 		};
-		9B312502223FA0310086C8C0 /* Recources */ = {
+		9B312502223FA0310086C8C0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				9B3124F7223FA0130086C8C0 /* Assets.xcassets */,
 				9B3124FC223FA0130086C8C0 /* Info.plist */,
 			);
-			path = Recources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		9B312503223FA08F0086C8C0 /* Storyboards */ = {
@@ -126,9 +149,8 @@
 		9B312504223FA09C0086C8C0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9B312509223FA2FC0086C8C0 /* DailyWeatherTableViewContoroller.swift */,
+				58A47F792B2D3A4400CBACF0 /* DailyWeather */,
 				9B31251F223FBCF70086C8C0 /* LocationAuthorizationViewController.swift */,
-				9B31250B223FA31A0086C8C0 /* DailyWeatherTableViewCell.swift */,
 				9B5F24662240190000A94EA9 /* DetailedWeatherTableViewController.swift */,
 			);
 			path = Controllers;
@@ -146,9 +168,9 @@
 		9B31250E223FA44F0086C8C0 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				9B312510223FA4600086C8C0 /* NetworkManager.swift */,
-				9B31251D223FB0950086C8C0 /* NetworkConstants.swift */,
+				58552B002B2D6AFA0084FB9E /* Networking */,
 				9B312521223FC3C30086C8C0 /* LocationAccessManager.swift */,
+				9B312510223FA4600086C8C0 /* NetworkManager.swift */,
 				9B312525223FC5AF0086C8C0 /* ReachabilityManager.swift */,
 			);
 			path = Managers;
@@ -286,10 +308,12 @@
 				9B5F24652240182A00A94EA9 /* ViewController+Alert.swift in Sources */,
 				9B312522223FC3C30086C8C0 /* LocationAccessManager.swift in Sources */,
 				9B312526223FC5AF0086C8C0 /* ReachabilityManager.swift in Sources */,
+				58552AFF2B2D6A450084FB9E /* Routes.swift in Sources */,
 				9B312518223FA89A0086C8C0 /* WeekWeather.swift in Sources */,
 				9B312514223FA4BB0086C8C0 /* DailyWeather.swift in Sources */,
 				9B312511223FA4600086C8C0 /* NetworkManager.swift in Sources */,
 				9B31250A223FA2FC0086C8C0 /* DailyWeatherTableViewContoroller.swift in Sources */,
+				58552AFD2B2D6A000084FB9E /* WeatherRouter.swift in Sources */,
 				9B3124F1223FA0120086C8C0 /* AppDelegate.swift in Sources */,
 				9B312520223FBCF70086C8C0 /* LocationAuthorizationViewController.swift in Sources */,
 			);
@@ -440,13 +464,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F565QP7QUB;
-				INFOPLIST_FILE = "$(SRCROOT)/SkyForecast/Recources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SkyForecast/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hs.SkyForecast.demoapi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SkyForecast.demoapi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -463,13 +487,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F565QP7QUB;
-				INFOPLIST_FILE = "$(SRCROOT)/SkyForecast/Recources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SkyForecast/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hs.SkyForecast.demoapi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SkyForecast.demoapi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

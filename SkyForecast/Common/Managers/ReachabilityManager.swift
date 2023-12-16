@@ -6,10 +6,9 @@
 //  Copyright © 2019 HellySolovii. All rights reserved.
 //
 
-import Foundation
 import Reachability
 
-@objc public class ReachabilityManager: NSObject {
+public class ReachabilityManager: NSObject {
     override fileprivate init(){}
     
     var isReachable = true
@@ -23,16 +22,16 @@ import Reachability
         }
     }
     
-    @objc static let shared = ReachabilityManager()
+    static let shared = ReachabilityManager()
     
-    @objc func startTracking(){
+    func startTracking(){
         reachability = Reachability()
         
         do { try reachability?.startNotifier() } catch {
             print("Unable to start notifier")
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: Notification.Name.reachabilityChanged,object: reachability)
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged),name: Notification.Name.reachabilityChanged,object: reachability)
     }
     
     func updateStatus(){

@@ -17,8 +17,8 @@ class DailyWeatherTableViewCell: UITableViewCell {
     
     func setup(with data: DailyWeather) {
         dateLabel.text = formattedDate(from: data.datetimeEpoch)
-        tempLabel.text = "\(Int(data.temp))°C"
-        feelLikeLabel.text = "Feels Like\n \(Int(data.feelslike))°C"
+        tempLabel.text = "\(Int(data.temp.rounded()))°C"
+        feelLikeLabel.text = "Feels Like\n \(Int(data.feelslike.rounded()))°C"
         summaryWeatherLabel.text = "\(data.description)"
         
         conditionLabel.attributedText = conditionAttributedString(for: data)

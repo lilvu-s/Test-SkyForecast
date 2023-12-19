@@ -27,12 +27,9 @@ final class DailyWeatherTableViewController: UITableViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         requestLocationAccess()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateWeatherIfNeeded()
+        updateWeatherData()
     }
     
     // MARK: - Fetch data
@@ -42,8 +39,9 @@ final class DailyWeatherTableViewController: UITableViewController {
         }
     }
     
-    private func updateWeatherIfNeeded() {
+    private func updateWeatherData() {
         let coordinates: (lat: Double, lon: Double) = locationManager.getCurrentCoordinates()
+        
         fetchWeatherData(for: coordinates.lat, lon: coordinates.lon)
     }
     

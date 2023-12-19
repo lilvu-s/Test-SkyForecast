@@ -26,6 +26,11 @@ final class Constants {
         static let weatherCellIdentifier = "DailyWeatherTableViewCell"
     }
     
+    enum UserType {
+        case anonymous
+        case authorized
+    }
+    
     static func emoji(for condition: String) -> String {
         switch condition {
         case "Clear":

@@ -20,7 +20,6 @@ class LocationAuthorizationViewController: UIViewController, Permissible {
         LocationAccessManager.shared.makePermissionRequest(from: self) { [weak self] granted in
             if granted {
                 LocationAccessManager.shared.userType = .authorized
-                LocationAccessManager.shared.updateLocation()
                 
                 self?.navigationController?.popViewController(animated: true)
             }

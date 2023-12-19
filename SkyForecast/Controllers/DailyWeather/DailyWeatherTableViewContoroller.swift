@@ -27,22 +27,21 @@ final class DailyWeatherTableViewController: UITableViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
         
         requestLocationAccess()
-        updateWeatherData()
     }
     
     // MARK: - Fetch data
     private func requestLocationAccess() {
         if locationManager.userType == .anonymous {
+            title = "\(Constants.Weather.defaultLat), \(Constants.Weather.defaultLon)"
             performSegue(withIdentifier: Constants.Segue.presentAuthorization, sender: nil)
         }
     }
     
-    private func updateWeatherData() {
-        let coordinates: (lat: Double, lon: Double) = locationManager.getCurrentCoordinates()
-        
-        fetchWeatherData(for: coordinates.lat, lon: coordinates.lon)
+    private func updateWeatherData(withLat lat: Double, lon: Double) {
+        fetchWeatherData(for: lat, lon: lon)
     }
     
     private func fetchWeatherData(for lat: Double, lon: Double) {
@@ -59,10 +58,6 @@ final class DailyWeatherTableViewController: UITableViewController {
                     self.weather = nil
                 }
             }
-        }
-        
-        LocationAccessManager.shared.locationUpdateHandler = { [weak self] city in
-            self?.title = city
         }
     }
     
@@ -82,10 +77,23 @@ final class DailyWeatherTableViewController: UITableViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.Segue.showDetailedWeather,
-           let vc = segue.destination as? DetailedWeatherTableViewController,
-           let path = tableView.indexPathForSelectedRow {
+        if segue.identifier == Constants.Segue.presentAuthorization,
+           let authorizationViewController = segue.destination as? LocationAuthorizationViewController {
+            authorizationViewController.authorizationHandler = { [weak self] lat, lon in
+                self?.updateWeatherData(withLat: lat, lon: lon)
+            }
+        }
+        else if segue.identifier == Constants.Segue.showDetailedWeather,
+                let vc = segue.destination as? DetailedWeatherTableViewController,
+                let path = tableView.indexPathForSelectedRow {
             vc.model = weatherData[path.row]
         }
+    }
+}
+
+// MARK: - LocationAccessManager Delegate
+extension DailyWeatherTableViewController: LocationAccessManagerDelegate {
+    func didUpdateCityName(_ cityName: String) {
+        title = cityName
     }
 }

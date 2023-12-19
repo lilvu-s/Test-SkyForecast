@@ -23,6 +23,7 @@ final class Constants {
     enum Weather {
         static let defaultLat = 37.8267
         static let defaultLon = -122.4233
+ 
         static let weatherCellIdentifier = "DailyWeatherTableViewCell"
     }
     

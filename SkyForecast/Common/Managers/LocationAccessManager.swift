@@ -10,9 +10,14 @@ import UIKit
 import CoreLocation
 import PermissionsService
 
+protocol LocationAccessManagerDelegate: AnyObject {
+    func didUpdateCityName(_ cityName: String)
+}
+
 final class LocationAccessManager: NSObject, CLLocationManagerDelegate {
     static let shared = LocationAccessManager()
     private let locationManager = CLLocationManager()
+    public weak var delegate: LocationAccessManagerDelegate?
     
     public var userType: Constants.UserType = .anonymous {
         didSet {
@@ -21,9 +26,7 @@ final class LocationAccessManager: NSObject, CLLocationManagerDelegate {
             }
         }
     }
-    
-    public var locationUpdateHandler: ((String) -> Void)?
-    
+        
     // MARK: - Initialization
     private override init() {
         super.init()
@@ -74,9 +77,9 @@ final class LocationAccessManager: NSObject, CLLocationManagerDelegate {
                     return
                 }
                 
-                if let placemark = placemarks?.first, let city = placemark.locality {
+                if let placemark = placemarks?.first, let city = placemark.locality, let self = self {
                     DispatchQueue.main.async {
-                        self?.locationUpdateHandler?(city)
+                        self.delegate?.didUpdateCityName(city)
                     }
                 }
             }

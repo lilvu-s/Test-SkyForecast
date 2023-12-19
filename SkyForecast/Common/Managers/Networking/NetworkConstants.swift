@@ -26,7 +26,6 @@ struct RequestType {
     static let get = "GET"
     static let put = "PUT"
     static let delete = "DELETE"
-    static let head = "HEAD"
 }
 
 //MARK: - Error

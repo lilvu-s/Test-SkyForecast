@@ -25,6 +25,6 @@ final class WeatherRouter {
             "key": apiKey,
             "contentType": "json"
         ]
-        return Route(baseURL: baseURL, path: path, method: "GET", parameters: parameters)
+        return Route(baseURL: baseURL, path: path, method: RequestType.get, parameters: parameters)
     }
 }

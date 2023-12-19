@@ -33,10 +33,7 @@ public struct Route {
     }
 
     public func asURLRequest() throws -> URLRequest {
-        guard var urlComponents = URLComponents(string: baseURL + path) else {
-            throw URLError(.badURL)
-        }
-
+        var urlComponents = URLComponents(string: baseURL + path) ?? URLComponents()
         urlComponents.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
         
         guard let url = urlComponents.url else {
@@ -47,11 +44,8 @@ public struct Route {
         urlRequest.httpMethod = method
         
         headers?.forEach { urlRequest.addValue($0.value, forHTTPHeaderField: $0.key) }
-
-        if let httpBody = httpBody {
-            urlRequest.httpBody = httpBody
-        }
-
+        urlRequest.httpBody = httpBody
+        
         return urlRequest
     }
 }

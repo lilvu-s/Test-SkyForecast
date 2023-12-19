@@ -9,23 +9,23 @@
 import Foundation
 
 struct DailyWeather: Codable {
-    var description: String
-    var conditions: String
-    var icon: String
+    let description: String
+    let conditions: String
+    let icon: String
     
-    var datetimeEpoch: TimeInterval
+    let datetimeEpoch: TimeInterval
     
-    var tempmax: Double
-    var feelslikemax: Double
-    var tempmin: Double
-    var feelslikemin: Double
+    let tempmax: Double
+    let feelslikemax: Double
+    let tempmin: Double
+    let feelslikemin: Double
     
-    var windspeed: Double
-    var visibility: Double
+    let windspeed: Double
+    let visibility: Double
     
-    var humidity: Double
-    var pressure: Double
+    let humidity: Double
+    let pressure: Double
     
-    var temp: Double // станом на зараз
-    var feelslike: Double // станом на зараз
+    let temp: Double // станом на зараз
+    let feelslike: Double // станом на зараз
 }

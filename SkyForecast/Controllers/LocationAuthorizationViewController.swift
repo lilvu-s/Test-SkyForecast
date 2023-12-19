@@ -9,7 +9,9 @@
 import UIKit
 import PermissionsService
 
-class LocationAuthorizationViewController: UIViewController, Permissible {
+final class LocationAuthorizationViewController: UIViewController, Permissible {
+    var authorizationHandler: ((Double, Double) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,19 +19,30 @@ class LocationAuthorizationViewController: UIViewController, Permissible {
     }
     
     @IBAction func authorizationTapped(_ sender: UIButton) {
+        requestLocationAuthorization()
+    }
+    
+    @IBAction func nonAuthorizedUse(_ sender: UIButton) {
+        setLocationUserType(.anonymous)
+        self.navigationController?.popViewController(animated: true)
+        
+        self.authorizationHandler?(Constants.Weather.defaultLat, Constants.Weather.defaultLon)
+    }
+    
+    private func requestLocationAuthorization() {
         LocationAccessManager.shared.makePermissionRequest(from: self) { [weak self] granted in
             if granted {
-                LocationAccessManager.shared.userType = .authorized
-                LocationAccessManager.shared.updateLocation()
-                
+                self?.setLocationUserType(.authorized)
                 self?.navigationController?.popViewController(animated: true)
+                
+                let coordinates = LocationAccessManager.shared.getCurrentCoordinates()
+                self?.authorizationHandler?(coordinates.lat, coordinates.lon)
             }
         }
     }
     
-    @IBAction func nonAuthorizedUse(_ sender: UIButton) {
-        LocationAccessManager.shared.userType = .anonymous
-        self.navigationController?.popViewController(animated: true)
+    private func setLocationUserType(_ userType: Constants.UserType) {
+        LocationAccessManager.shared.userType = userType
     }
 }
 

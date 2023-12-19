@@ -10,30 +10,29 @@ import UIKit
 import CoreLocation
 import PermissionsService
 
+protocol LocationAccessManagerDelegate: AnyObject {
+    func didUpdateCityName(_ cityName: String)
+}
+
 final class LocationAccessManager: NSObject, CLLocationManagerDelegate {
     static let shared = LocationAccessManager()
     private let locationManager = CLLocationManager()
+    public weak var delegate: LocationAccessManagerDelegate?
     
-    public enum UserType {
-        case anonymous
-        case authorized
-    }
-    
-    public var userType: UserType = .anonymous {
+    public var userType: Constants.UserType = .anonymous {
         didSet {
             if userType == .authorized {
                 locationManager.startUpdatingLocation()
             }
         }
     }
-    
-    public var locationUpdateHandler: ((String) -> Void)?
-    
+        
     // MARK: - Initialization
     private override init() {
         super.init()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        
         determineUserType()
     }
     
@@ -50,19 +49,13 @@ final class LocationAccessManager: NSObject, CLLocationManagerDelegate {
         return (location.coordinate.latitude, location.coordinate.longitude)
     }
     
-    public func updateLocation() {
-        if userType == .authorized {
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
     // MARK: - Permission Handling
     public func makePermissionRequest(from viewController: Permissible, completion: @escaping (Bool) -> Void) {
         let config = LocationConfiguration(.whenInUse)
-        Permission<Location>.prepare(for: viewController, with: config) { granted in
+        Permission<Location>.prepare(for: viewController, with: config) { [weak self] granted in
             DispatchQueue.main.async {
                 if granted {
-                    self.userType = .authorized
+                    self?.userType = .authorized
                     completion(true)
                 } else {
                     completion(false)
@@ -78,15 +71,15 @@ final class LocationAccessManager: NSObject, CLLocationManagerDelegate {
         
         DispatchQueue.global(qos: .userInitiated).async {
             let geocoder = CLGeocoder()
-            geocoder.reverseGeocodeLocation(location, preferredLocale: Locale(identifier: "en")) { (placemarks, error) in
+            geocoder.reverseGeocodeLocation(location, preferredLocale: Locale(identifier: "en")) { [weak self] (placemarks, error) in
                 if let error = error {
                     print("Reverse geocoding error: \(error)")
                     return
                 }
                 
-                if let placemark = placemarks?.first, let city = placemark.locality {
+                if let placemark = placemarks?.first, let city = placemark.locality, let self = self {
                     DispatchQueue.main.async {
-                        self.locationUpdateHandler?(city)
+                        self.delegate?.didUpdateCityName(city)
                     }
                 }
             }
@@ -95,7 +88,7 @@ final class LocationAccessManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status.isAuthorized {
-            manager.startUpdatingLocation()
+            manager.startUpdatingHeading()
         }
     }
     

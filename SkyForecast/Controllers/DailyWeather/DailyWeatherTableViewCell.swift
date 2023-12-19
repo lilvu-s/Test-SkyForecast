@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DailyWeatherTableViewCell: UITableViewCell {
+final class DailyWeatherTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var feelLikeLabel: UILabel!

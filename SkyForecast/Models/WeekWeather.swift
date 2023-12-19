@@ -9,11 +9,11 @@
 import Foundation
 
 struct WeekWeather: Codable {
-    var latitude: Double
-    var longitude: Double
-    var timezone: String
-    var description: String
+    let latitude: Double
+    let longitude: Double
+    let timezone: String
+    let description: String
     
-    var days: [DailyWeather]
+    let days: [DailyWeather]
 }
 

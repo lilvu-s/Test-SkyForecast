@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WeatherRouter {
+final class WeatherRouter {
     private let baseURL: String
     private var apiKey: String {
         return ProcessInfo.processInfo.environment["APIKey"] ?? ""
@@ -25,6 +25,6 @@ class WeatherRouter {
             "key": apiKey,
             "contentType": "json"
         ]
-        return Route(baseURL: baseURL, path: path, method: "GET", parameters: parameters)
+        return Route(baseURL: baseURL, path: path, method: RequestType.get, parameters: parameters)
     }
 }

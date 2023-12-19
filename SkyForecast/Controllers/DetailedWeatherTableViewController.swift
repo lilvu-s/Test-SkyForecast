@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DetailedWeatherTableViewController: UITableViewController {
+final class DetailedWeatherTableViewController: UITableViewController {
     //MARK: - Outlets
     @IBOutlet weak var highestTemperatureLabel: UILabel!
     @IBOutlet weak var lowestTemperatureLabel: UILabel!
